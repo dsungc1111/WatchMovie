@@ -8,15 +8,17 @@
 import UIKit
 import SnapKit
 
-class ViewController: UITabBarController {
+class ViewController: UIViewController {
 
     
-    let images: [UIImage]! = [._1, ._2, ._3, ._4, ._5, .극한직업, .도둑들, .명량, .베테랑, .부산행, .신과함께인과연, .신과함께죄와벌, .아바타, .알라딘, .암살]
+    var images: [UIImage]! = [._1, ._2, ._3, ._4, ._5, .극한직업, .도둑들, .명량, .베테랑, .부산행, .신과함께인과연, .신과함께죄와벌, .아바타, .알라딘, .암살]
     
     lazy var mainImageView = {
         let view = UIImageView()
         view.clipsToBounds = true
-        view.image = images[Int.random(in: 0...images.count-1)]
+        let number = Int.random(in: 0...images.count-1)
+        view.image = images[number]
+        images.remove(at: number )
         view.contentMode = .scaleAspectFill
         view.backgroundColor = .white
         view.layer.cornerRadius = 10
@@ -47,14 +49,16 @@ class ViewController: UITabBarController {
     var hotContentsLabel = {
         let label = UILabel()
         label.text = "지금 뜨는 컨텐츠"
-        label.textColor = .white
+        label.textColor = .black
         label.font = .systemFont(ofSize: 17)
         return label
     }()
     lazy var recommendedContent1 = {
         let view = UIImageView()
         view.clipsToBounds = true
-        view.image = images[Int.random(in: 0...images.count-1)]
+        let number = Int.random(in: 0...images.count-1)
+        view.image = images[number]
+        images.remove(at: number )
         view.layer.cornerRadius = 5
         view.contentMode = .scaleAspectFill
         return view
@@ -62,7 +66,9 @@ class ViewController: UITabBarController {
     lazy var recommendedContent2 = {
         let view = UIImageView()
         view.clipsToBounds = true
-        view.image = images[Int.random(in: 0...images.count-1)]
+        let number = Int.random(in: 0...images.count-1)
+        view.image = images[number]
+        images.remove(at: number )
         view.layer.cornerRadius = 5
         view.contentMode = .scaleAspectFill
         return view
@@ -70,7 +76,8 @@ class ViewController: UITabBarController {
     lazy var recommendedContent3 = {
         let view = UIImageView()
         view.clipsToBounds = true
-        view.image = images[Int.random(in: 0...images.count-1)]
+        let number = Int.random(in: 0...images.count-1)
+        view.image = images[number]
         view.layer.cornerRadius = 5
         view.contentMode = .scaleAspectFill
         return view
@@ -81,17 +88,23 @@ class ViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
 
-        navigationItem.title = "최대성님"
+
+       
+        
+        navigationUI()
         configureHieararchy()
         configureLayout()
 
     }
     
-    func configureTabBar() {
-        
+    
+    func navigationUI() {
+        navigationItem.title = "최대성님"
+        navigationController?.navigationBar.tintColor = .blue
     }
+    
     
     
     func configureHieararchy() {
@@ -106,7 +119,7 @@ class ViewController: UITabBarController {
     
     func configureLayout() {
         mainImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             make.leading.equalTo(20)
             make.trailing.equalTo(-20)
             make.height.equalTo(420)
@@ -131,19 +144,19 @@ class ViewController: UITabBarController {
         recommendedContent1.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide).inset(30)
             make.top.equalTo(hotContentsLabel.snp.bottom).offset(10)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(60)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.width.equalTo(110)
         }
         recommendedContent2.snp.makeConstraints { make in
             make.leading.equalTo(recommendedContent1.snp.trailing).offset(5)
             make.top.equalTo(hotContentsLabel.snp.bottom).offset(10)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(60)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.width.equalTo(110)
         }
         recommendedContent3.snp.makeConstraints { make in
             make.leading.equalTo(recommendedContent2.snp.trailing).offset(5)
             make.top.equalTo(hotContentsLabel.snp.bottom).offset(10)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(60)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.width.equalTo(110)
         }
         
@@ -152,6 +165,9 @@ class ViewController: UITabBarController {
     
     
 
+ 
+    
+    
 }
 
 
