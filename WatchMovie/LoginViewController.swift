@@ -51,10 +51,9 @@ class LoginViewController: UIViewController {
     }()
     
     @objc func loginButtonTapped() {
-        let vc = ViewController()
-
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.pushViewController(vc, animated: true)
+        let vc = TabBarViewController()
+        
+        present(vc, animated: true)
 
     }
 
