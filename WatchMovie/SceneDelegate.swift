@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 // 탭바 이름들 설정
                 vc1.title = "Like"
                 vc2.title = "House"
-                vc3.title = "Post"
+                vc3.title = "Lotto"
               
                 
                 // 탭바로 사용하기 위한 뷰 컨트롤러들 설정
@@ -42,7 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 guard let items = tabBarVC.tabBar.items else { return }
                 items[0].image = UIImage(systemName: "star")
                 items[1].image = UIImage(systemName: "house")
-                items[2].image = UIImage(systemName: "paperplane")
+                items[2].image = UIImage(systemName: "soccerball.circle.inverse")
               
                 // 기본루트뷰를 탭바컨트롤러로 설정⭐️⭐️⭐️
                 window?.rootViewController = tabBarVC
