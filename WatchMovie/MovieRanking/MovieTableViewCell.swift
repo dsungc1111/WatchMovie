@@ -43,7 +43,12 @@ class MovieTableViewCell: UITableViewCell {
         
         
     }
-    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0))
+//    }
+//    
     func configureHeirarchy() {
         contentView.addSubview(movieLabel)
         contentView.addSubview(rankLable)
@@ -59,6 +64,7 @@ class MovieTableViewCell: UITableViewCell {
             make.leading.equalTo(rankLable.snp.trailing).offset(10)
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(5)
             make.width.equalTo(190)
+            
         }
         dateLabel.snp.makeConstraints { make in
             make.verticalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(5)

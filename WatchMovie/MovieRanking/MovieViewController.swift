@@ -74,6 +74,8 @@ class MovieViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         searchTextField.layer.addBorder([.bottom], color: UIColor.white, width: 1)
     }
+    
+  
     @objc func searchButtonTapped() {
         callRequest()
         tableView.reloadData()
@@ -155,6 +157,10 @@ extension MovieViewController: UITableViewDelegate, UITableViewDataSource {
         cell.dateLabel.text = list[indexPath.row].openDt
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
