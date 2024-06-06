@@ -10,10 +10,16 @@ import UIKit
 protocol UserIdentifier {
     static var identifier: String { get }
 }
+
 extension UIViewController {
     static var identifier: String {
         return String(describing: self)
     }
 }
 
+extension UITableViewCell {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}
 

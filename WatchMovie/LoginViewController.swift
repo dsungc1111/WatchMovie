@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
     }()
     
     @objc func loginButtonTapped() {
-        let vc = TabBarViewController()
+        let vc = MovieViewController()
         
         present(vc, animated: true)
 
