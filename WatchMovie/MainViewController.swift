@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
     var dateLabel = {
         let date = UILabel()
         date.text = "곧 나옴"
-        date.font = .systemFont(ofSize: 10)
+        date.font = .systemFont(ofSize: 14)
         date.textColor = .lightGray
         return date
     }()
@@ -107,17 +107,27 @@ class MainViewController: UIViewController {
     var picker = UIPickerView()
     
     var list: lottery? = nil
+    var numbers = {
+        var list = []
+        for i in 1...1122 {
+            list.append("\(i)")
+        }
+        return list
+    }()
     
     var pickNumber = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         picker.delegate = self
         picker.dataSource = self
+        lottoTextField.inputView = picker
         configureHierarchy()
         configureLayout()
-        callRequest(number: 860)
+        callRequest(number: 1122)
+        lottoTextField.text = "1122"
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -180,7 +190,7 @@ class MainViewController: UIViewController {
         view.addSubview(plus)
         view.addSubview(lottoNumber7)
         view.addSubview(bonus)
-        view.addSubview(picker)
+        //view.addSubview(picker)
     }
     func configureLayout() {
         lottoTextField.snp.makeConstraints { make in
@@ -256,12 +266,12 @@ class MainViewController: UIViewController {
             make.trailing.equalTo(view.safeAreaLayoutGuide).inset(27)
             make.height.equalTo(20)
         }
-        picker.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.height.equalTo(200)
-        }
-        picker.backgroundColor = .systemGray6
+//        picker.snp.makeConstraints { make in
+//            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+//            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+//            make.height.equalTo(200)
+//        }
+//        picker.backgroundColor = .systemGray6
     }
     
     func callRequest(number: Int) {
@@ -272,19 +282,20 @@ class MainViewController: UIViewController {
             case .success(let value):
                 self.list = value
                 
-                    self.lottoNumber1.text = "\(value.drwtNo1)"
-                    self.lottoNumber2.text = "\(value.drwtNo2)"
-                    self.lottoNumber3.text = "\(value.drwtNo3)"
-                    self.lottoNumber4.text = "\(value.drwtNo4)"
-                    self.lottoNumber5.text = "\(value.drwtNo5)"
-                    self.lottoNumber6.text = "\(value.drwtNo6)"
-                    self.lottoNumber7.text = "\(value.bnusNo)"
+                self.lottoNumber1.text = "\(value.drwtNo1)"
+                self.lottoNumber2.text = "\(value.drwtNo2)"
+                self.lottoNumber3.text = "\(value.drwtNo3)"
+                self.lottoNumber4.text = "\(value.drwtNo4)"
+                self.lottoNumber5.text = "\(value.drwtNo5)"
+                self.lottoNumber6.text = "\(value.drwtNo6)"
+                self.lottoNumber7.text = "\(value.bnusNo)"
                     
                 self.configureUI()
 
                 self.dateLabel.text = value.drwNoDate
-                self.lottoTextField.text = "\(value.drwNo)"
-                self.pickNumber = value.drwNo
+//              
+//                self.pickNumber = value.drwNo
+                print(value)
             case .failure(let error):
                 print(error)
             }
@@ -293,27 +304,32 @@ class MainViewController: UIViewController {
         }
         
     }
+    
 }
 
 extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return list?.drwNoDate.count ?? 3
+        return numbers.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(list?.drwNo ?? 4)"
+        //pickerView.selectedRow(inComponent: numbers.count)
+        return (numbers[row] as! String)
     }
     
     
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        <#code#>
-//    }
-//    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        lottoTextField.text = (numbers[row] as! String)
+        let newLottoNumber = Int(numbers[row] as! String)!
+        callRequest(number: newLottoNumber)
+    }
+    
     
     
     
