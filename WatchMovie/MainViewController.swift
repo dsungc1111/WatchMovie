@@ -128,12 +128,26 @@ class MainViewController: UIViewController {
         configureLayout()
         callRequest(number: 1122)
         lottoTextField.text = "1122"
-        
+        hideKeyboard()
     }
     override func viewDidAppear(_ animated: Bool) {
         subtitleView.layer.addBorder([.bottom], color: UIColor.lightGray, width: 0.5)
     }
     
+    func hideKeyboard() {
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                     action: #selector(dismissKeyboard))
+            view.addGestureRecognizer(tap)
+            
+            // 또는 아래처럼 작성하셔도 됩니다.
+            
+           // view.addGestureRecognizer(UITapGestureRecognizer(target: self,
+           //                                                  action: #selector(dismissKeyboard)))
+        }
+        
+       @objc func dismissKeyboard() {
+           view.endEditing(true)
+       }
     
     func setLotto() -> UILabel {
         let circle = UILabel()
@@ -305,7 +319,13 @@ class MainViewController: UIViewController {
         
     }
     
+    
+    
 }
+
+
+
+
 
 extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
